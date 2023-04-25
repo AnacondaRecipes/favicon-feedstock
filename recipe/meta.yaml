@@ -1,0 +1,49 @@
+{% set name = "favicon" %}
+{% set version = "0.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/favicon-{{ version }}.tar.gz
+  sha256: 6d6b5a78de2a0d0084589f687f384b2ecd6a6527093fec564403b1a30605d7a8
+
+build:
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+    - pytest-runner 6.0.0
+  run:
+    - python
+    - requests >=2.21.0
+    - beautifulsoup4 >=4.7.0
+
+test:
+  imports:
+    - favicon
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/scottwernervt/favicon
+  dev_url: https://github.com/scottwernervt/favicon
+  doc_url: https://github.com/scottwernervt/favicon#usage
+  summary: Get a website's favicon.
+  description: |
+    `favicon` is a Python library to find a website's favicon.
+  license: MIT
+  license_file: LICENSE
+  license_family: MIT
+
+extra:
+  recipe-maintainers:
+    - ELundby45
